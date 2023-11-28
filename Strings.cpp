@@ -1,105 +1,19 @@
-/***********************************************
- * Trabalho PED de Árvore Binária              *
- * Objetivo: Fazer um fluxograma para auxiliar *
- * no aprendizdo de músicas na guitarra/baixo  *
- * Programador: Guilherme A. Barbian           *
- * Professora: Daniela Bagatini                *
-/***********************************************/ 
+/*****************************************************
+ * Trabalho final de PED usando arvores binárias 	 *
+ * O programa consiste em um modelo de recomendações *
+ * de bebidas com base nas respostas do usuário      *
+/*****************************************************/ 
 
-#include <stdio.h>		// printf e scanf
-#include <locale.h>		// setlocale
-#include <string.h>		// strcpy
-#include <stdlib.h>		// exit
-#include <conio.h>      // getch
-#include <windows.h>    // system("cls")
+#include <stdio.h>		// funções básicas do C
+#include <locale.h>		// Alfabeto em português (pt-BR)
+#include <string.h>		// Manipulação de strings 
+#include <stdlib.h>		// encerrar o programa
+#include <conio.h>      // funções que facilitam a interação com o console
+#include <windows.h>    // funções do sistema
+#include "MODELO.h"     // biblioteca própria da estrutura do código
 
-
-/***********************************************
- * Definição dos Registros                     *
- ***********************************************/
-typedef struct{
-	int codigo;	          	// Codigo para balanceamento
-	char texto[1000];		// Texto presente no NODO
-}INFORMACAO;
-
-typedef struct arv{
-	INFORMACAO info;		// Dados do Registro
-	arv *sube;		        // Ponteiro para o nodo da Esquerda
-	arv *subd;		        // Ponteiro para o nodo da Direita
-}ARVORE;
-
-
-/***********************************************
- * Definição das Funções                       *
- ***********************************************/
  
-void insereNodo( ARVORE **r , int cod, const char texto[600]);                // Função para inserir Registro na Árvore
-void copiaDados( FILE *dados, ARVORE **r);                                    // Função para copiar os dados do arquivo Dados
-void perguntasMusicas( ARVORE **p );                                          // Função para rodar o fluxograma
-void imprimeMusicas( ARVORE *r );                                             // Função para imprimir todas as músicas
-void imprimeInformacoes();                                                    // Função para imprimir informações sobre os instrumentos disponíveis
-
-/***********************************************
- * Programa Principal                          *
- ***********************************************/
-
-int main(void){
-	setlocale(LC_ALL, "Portuguese");      // Altera o idioma para Português
-	int op, cod;                          // Registra a opção selecionada no Menu
-	FILE *dados= fopen("dados.txt", "r"); // Adiciona o arquivo Dados ao código para ser lido
-	ARVORE *r = NULL, *p = NULL;          // Declaração das Árvores
-	copiaDados( dados, &r );              // Copia os dados do arquivo
-
-	
-	while( 1 ){
-		printf("Olá, seja bem vindo ao STRINGS, aqui vamos te auxiliar no aprendizado de instrumentos musicais!\n");
-		printf("\n |---------------------------------------------------|");
-		printf("\n |STRINGS                                        Menu|");
-		printf("\n |Pressione [1]                Recomendação de Música|");
-		printf("\n |Pressione [2]              Mostrar todas as Músicas|");
-		printf("\n |Pressione [3]        Informações Sobre Instrumentos|");
-		printf("\n |Pressione [0]                       Sair do STRINGS|");
-		printf("\n |---------------------------------------------------|");
-		printf("\n\n Opção: ");
-		scanf("%d", &op);                    // Tecla de opção do menu
-		fflush(stdin);                       // Limpa o buffer do teclado
-		
-		switch(op){
-			case 1:
-				system("cls");                    // Limpa a tela do console
-				perguntasMusicas(&r);             // Chama a Função de perguntas ao usuário
-				break;
-			
-			case 2:
-				system("cls");                                                   // Limpa a tela do console
-				printf("Biblioteca de músicas do STRINGS\n");
-				imprimeMusicas(r);                                               // Imprime todas as músicas presentes na biblioteca
-				printf("Aperte qualquer tecla para voltar ao Menu Principal");   
-				getche();                                                        // Volta ao menu principal
-				system("cls");
-				break;
-			
-			case 3:
-				system("cls");                                                   // Limpa a tela do console
-				imprimeInformacoes();                                            // Imprime informações dos instrumentos
-				break;
-				
-			case 0:
-				printf("\n Adeus! Até a próxima vez!\n");
-				exit(1);                                                        // Fecha o PED
-				break;
-				
-			default:                                                            // Caso o usuário não digite 1, 2, 3 ou 0
-				system("cls");
-				printf("\nDigite um número válido.\n\n");
-		}
-	}
-	
-}
-
-
-
-/************************************************* 
+ /************************************************* 
  * insereNodo                                    *
  * objetivo: rotina para inserir nodo na ARVORE  *
  * entrada : ARVORE e cod                        *
@@ -156,15 +70,16 @@ void copiaDados( FILE *dados, ARVORE **r ){
  
  
 /************************************************* 
- * perguntasMusicas                              *
- * objetivo: Rodar o fluxograma de perguntas ao  *
- * usuário para descobrir a música indicada      *
+ * recomendacoes                                 *
+ * objetivo: Percorrer a base de dados (txt) por 
+ * meio das respostas do usuário, a fim de indicar 
+ * uma bebida para o mesmo
  * entrada : ARVORE                              *
- * saída   : Música indicada ao usuário          *
+ * saída   : bebida indicada ao usuário          *
  *************************************************/ 
  
  
- void perguntasMusicas( ARVORE **p ){
+ void recomendacoes( ARVORE **p ){
  	int option;
  	
  	if(p == NULL){                                                        // se a raíz estiver vazia
@@ -193,86 +108,82 @@ void copiaDados( FILE *dados, ARVORE **r ){
 	 switch(option){
 	 	
 	 	case 1:                                                          // se a resposta for 1, descer a esquerda
-	 		perguntasMusicas( &(*p)->sube );
+	 		recomendacoes( &(*p)->sube );
 	 		break;
 	 	
 	 	case 2:                                                          // se a resposta for 2, descer a direita
-	 		perguntasMusicas( &(*p)-> subd );
+	 		recomendacoes( &(*p)-> subd );
 	 		break;
 	 		
 	 	default:                                                         // se não for nenhuma, repetir a pergunta
-	 		printf("Digite uma opção válida\n\n");
-	 		perguntasMusicas( &(*p) );
+	 		printf("Opção inválida. Tnete novamente\n\n");
+	 		recomendacoes( &(*p) );
 	 }
 	 
  	
  }
  
  
- /*************************************************
-  * imprimiMusicas                                *
-  * objetivo: Rodar o fluxograma de perguntas ao  *
-  * usuário para descobrir a música indicada      *
-  * entrada : ARVORE                              *
-  * saída   : Música indicada ao usuário          *
-  *************************************************/ 
- 
- 
-void imprimeMusicas( ARVORE *p ){
+/***********************************************
+ * Programa Principal                          *
+ ***********************************************/
 
- 	if( p != NULL){                              // se a raíz não estiver vazia
- 		if(p->subd == NULL && p->sube == NULL){  // imprime nodes folha(músicas)
- 			printf("\n---------------------------------------------------");
- 			printf("\n%s", p->info.texto);       // printa as músicas
- 			printf("---------------------------------------------------\n");
-		 }
-		imprimeMusicas(p->subd);                 // procura nodes folha à direita
-		imprimeMusicas(p->sube);                 // procura nodes folha à esquerda 
-	 }
- }
- 
- 
- /************************************************* 
- * imprimeInformacoes                            *
- * objetivo: Mostrar informações úteis           *
- * entrada : None                                *
- * saída   : Informações                         *
- *************************************************/ 
- 
- void imprimeInformacoes(){
- 	int po;
- 	
- 	system("cls");                               // limpa a tela do console
- 	printf("Sobre qual desses instrumentos você quer saber sobre?\n[1]Baixo\n[2]Guitarra Base\n\n");
- 	printf("Digite sua opção: ");
-	scanf("%d", &po);                            // registra a opção
-	fflush(stdin);                               // limpa o buffer do teclado
+int main(void){
+	setlocale(LC_ALL, "Portuguese");      // Altera o idioma para Português
+	int op, cod;                          // Registra a opção selecionada no Menu
+	FILE *dados= fopen("dados.txt", "r"); // Adiciona o arquivo Dados ao código para ser lido
+	ARVORE *r = NULL, *p = NULL;          // Declaração das Árvores
+	copiaDados( dados, &r );              // Copia os dados do arquivo
+
 	
-	switch(po){
-		case 1:                                  // se for opção 1, imprimir informações sobre o contrabaixo
-			system("cls");
-			printf("\n |---------------------------------------------------|");
-			printf("\n |                                                   |");
-			printf("\n |             Informações sobre o Baixo             |");
-			printf("\n |                                                   |");
-			printf("\n |---------------------------------------------------|");
-			printf("\n\nO Baixo Elétrico é a versão moderna do Contrabaixo, instrumento utilizado para tocar\nas notas mais graves da música, fazendo assim um 'base' para que os instrumentos\nde frequência média-alta(teclado, guitarra, voz) harmonizem melhor e tenham mais\nliberdade na hora de tocar suas melodias.\nAssim como no passado o Baixo Elétrico substituiu o Contrabaixo, hoje em dia é\ncomum vermos o este ser substituido por 808's, especialmente na música POP.\n\nAlguns baixistas que fizeram história: \n\nNikki Sixx, Mötley Crüe\nNikki foi um dos principais baixistas e compositores dos anos 80, junto de sua\nbanda, criou um dos gêneros mais populares da época, o Glam Metal.\n\nHumberto Gessinger, Engenheiros do Hawaii\nHumberto foi um dos maiores baixistas da história do Brasil, fundou com amigos a\nEngenheiros do Hawaii, banda que marcou a história do Rock Nacional, após alguns\nanos, se especializou em sua carreira solo, onde toca guitarra, mas seu legado é\ninquestionável.\n\nChampignon, Charlie Brown Jr.\nChampignon foi, talvez, o maior baixista da história do Brasil, vencedor do prêmio\nde melhor baixista da América Latina duas vezes, marcou uma geração inteira com suas\nlinhas dinâmicas, expressivas e melódicas. Champignon faleceu em 2013, deixando para trás\num legado imensurável para a história da música brasileira.\n\n\nDigite qualquer tecla para voltar ao Menu Principal.");
-			getche();                            // limpa a tela e volta ao menu principal
-			system("cls");
-			return;
-			break;
+	while( 1 ){
+		printf("\n        Kit Maker, Redefinindo a Arte de Brindar.        \n");
+		printf("\n       ¦¦¦¦¦¦¦¦¦                                           "); 
+		printf("\n        ¦¦¦¦¦¦¦                                            "); 
+		printf("\n        ¦¦¦¦¦¦¦                                            "); 
+		printf("\n        ¦¦¦¦¦¦¦                                            "); 
+		printf("\n       ¦¦¦¦¦¦¦¦¦                                           "); 
+		printf("\n      ¦¦¦¦¦¦¦¦¦¦¦                                          "); 
+		printf("\n     ¦¦¦¦¦¦¦¦¦¦¦¦¦             [1] Recomendações de bebida "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦                                        "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦                                        "); 
+		printf("\n    ¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦¦¦                                   "); 
+		printf("\n    ¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦¦¦                                   "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦                                    "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦                                     "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦          [0] Sair do programa        "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦                                      "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦                                   \n");
+		printf("\n\n Escolha alguma opção: ");
+		scanf("%d", &op);                    // Tecla de opção do menu
+		fflush(stdin);                       // Limpa o buffer do teclado
+		
+		switch(op){
+			case 1:
+				system("cls");                    // Limpa a tela do console
+				recomendacoes(&r);             // Chama a Função de perguntas ao usuário
+				break;
 			
-		case 2:                                   // se for opção 2, imprimir informações sobre a guitarra  
-			system("cls");
-			printf("\n |---------------------------------------------------|");
-			printf("\n |                                                   |");
-			printf("\n |          Informações sobre a Guitarra             |");
-			printf("\n |                                                   |");
-			printf("\n |---------------------------------------------------|");	
-			printf("\n\nA Guitarra é um dos instrumentos mais famosos do mundo inteiro, sua história começa\ncom o violão, instrumento de seis cordas que toca desde frênquencias médias até agudas, a popularização\ndo instrumento se deu por conta do gênero precursor da maioria dos gêneros famosos hoje,\no Blues.\nAlguns anos no futuro, foi criada a guitarra elétrica, que dava mais diversidade e\nflexibilidade aos instrumentistas na hora de fazer sons diferentes e não convencionais.\nA guitarra encontrou seu brilho máximo no Rock n' Roll, onde o seu som tanto agressivo\nquanto angelical poderia ser explorado da maneira mais inventiva possível.\nAlguns guitarristas que fizeram história:\n\nSlash, Guns n' Roses\nImpossível não falar de Slash quando falamos sobre guitarristas famosos, a estrela\ndo Guns n' Roses fez alguns dos solos e riffs mais conhecidos da história do\ninstrumento, Slash compôs desde músicas rápidas e agressivas como You Could be Mine\naté baladas lentas e emocionantes como Don't Cry.\n\nJohnny Ramone, Ramones\nUm dos mais influentes guitarristas do Punk Rock, Johnny mostrou que nem só com\ntécnincas avançadas se faz um bom show. O rockeiro popularizou a ideia do DIY\n(Do It Yourself) na música, compondo músicas de apenas três power chords e solos\nde literalmente... uma nota... O que importava nas músicas dos Ramones eram as suas\nletras cheias de críticas e sua atitude anarquista nos palcos\n\n\nDigite qualquer tecla para voltar ao Menu Principal.");
-			getche();                            // limpa a tela e volta ao menu principal
-			system("cls");
-			return;
-			break;
+			case 0:
+				printf("\nENCERRANDO...\n");
+				exit(1);                                                        // Fecha o PED
+				break;
+				
+			default:                                                            // Caso o usuário não digite 1, 2, 3 ou 0
+				system("cls");
+				printf("\nNúmero inválido! Tente novamente\n\n");
+		}
 	}
- }
+	
+}
+
+
+
+
+ 
+
