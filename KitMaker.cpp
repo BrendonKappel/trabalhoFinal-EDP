@@ -48,23 +48,19 @@
  * entrada : dados e Arvore                      *
  * saída   : Arvore com registros                *
  *************************************************/  
- 
 void copiaDados( FILE *dados, ARVORE **r ){
  	char textoaux[1000];          // auxiliar para textos
- 	int codaux, i=0;              // auxiliar para codigos e i
+ 	int codaux, i;              // auxiliar para codigos e i
  	
  	if(dados == NULL){            // caso o arquivo não seja encontrado
- 		printf("Impossível abrir o arquivo.\n");
+ 		printf("Arquivo vazio! \n");
  		getche();                 // retorna ao Menu Principal
  		return;
 	 } else{
-	 	while( i < 64 ){                                                // repetir enquanto i for menor de 64 (pois temos 63 NODOS no total)
+	 	for(i = 0; i < 64; i++) {                                        // repetir enquanto i for menor de 64 (pois temos 63 NODOS no total)
 	 		fscanf(dados, "%d", &codaux);                               // copia o código do arquivo
-	 		//const char *textoaux2 = fgets(textoaux, 200, dados);        // copia o texto do arquivo
-	 		insereNodo(&(*r), codaux, fgets(textoaux, 200, dados));                       // insere na árvore
-	 		i++;                                                        // i aumenta 1
+	 		insereNodo(&(*r), codaux, fgets(textoaux, 200, dados));    // insere na árvore
 		 }
-	 	
 	 }
 }
  
@@ -77,13 +73,11 @@ void copiaDados( FILE *dados, ARVORE **r ){
  * entrada : ARVORE                              *
  * saída   : bebida indicada ao usuário          *
  *************************************************/ 
- 
- 
  void recomendacoes( ARVORE **p ){
  	int option;
  	
  	if(p == NULL){                                                        // se a raíz estiver vazia
- 		printf("A raíz está vazia!\n");
+ 		printf("\nA árvore não possui elementos");
  		printf("\nAperte qualquer tecla para voltar ao menu principal.");
  		return;
     }
@@ -116,10 +110,14 @@ void copiaDados( FILE *dados, ARVORE **r ){
 	 		break;
 	 		
 	 	default:                                                         // se não for nenhuma, repetir a pergunta
-	 		printf("Opção inválida. Tnete novamente\n\n");
+	 		printf("Opção inválida. Tente novamente\n\n");
 	 		recomendacoes( &(*p) );
 	 }
 	 
+ 	
+ }
+ 
+ void imprime_cardapio( ARVORE *r) { // percorre arvore e imprime suas folhas
  	
  }
  
@@ -138,25 +136,25 @@ int main(void){
 	
 	while( 1 ){
 		printf("\n        Kit Maker, Redefinindo a Arte de Brindar.        \n");
-		printf("\n       ¦¦¦¦¦¦¦¦¦                                           "); 
-		printf("\n        ¦¦¦¦¦¦¦                                            "); 
-		printf("\n        ¦¦¦¦¦¦¦                                            "); 
+		printf("\n       ¦¦¦¦¦¦¦¦¦                							 "); 
+		printf("\n        ¦¦¦¦¦¦¦                 							 "); 
+		printf("\n        ¦¦¦¦¦¦¦               [1] Recomendações de bebida  "); 
 		printf("\n        ¦¦¦¦¦¦¦                                            "); 
 		printf("\n       ¦¦¦¦¦¦¦¦¦                                           "); 
 		printf("\n      ¦¦¦¦¦¦¦¦¦¦¦                                          "); 
-		printf("\n     ¦¦¦¦¦¦¦¦¦¦¦¦¦             [1] Recomendações de bebida "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦                                        "); 
+		printf("\n     ¦¦¦¦¦¦¦¦¦¦¦¦¦             							 "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦           [2] Exibir cardápio completo "); 
 		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦                                        "); 
 		printf("\n    ¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦¦¦                                   "); 
 		printf("\n    ¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦¦¦                                   "); 
 		printf("\n    ¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦                                    "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦                                     "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦          [0] Sair do programa        "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦        [3] FUNCAO                   "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦                  				     "); 
 		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
 		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
 		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦          [0] Sair do programa         "); 
+		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                   					 "); 
 		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦                                      "); 
 		printf("\n    ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦                                   \n");
 		printf("\n\n Escolha alguma opção: ");
@@ -167,6 +165,11 @@ int main(void){
 			case 1:
 				system("cls");                    // Limpa a tela do console
 				recomendacoes(&r);             // Chama a Função de perguntas ao usuário
+				break;
+				
+			case 2:
+				system("cls");
+				//imprime_cardapio(&r); // funçao para imprimir todas as folhas (opções de bebida)
 				break;
 			
 			case 0:

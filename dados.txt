@@ -41,7 +41,7 @@
 19Bebida recomendada: Whisky com uva e gengibre
 21Bebida recomendada: Drink de morango com espumante
 23Bebida recomendada: Batida de whisky
-25Bebida recomendada: Caipirinha de limão
+25Bebida recomendada: Caipirinha de limão 
 27Bebida recomendada: Margarita
 29Bebida recomendada: Leite de onça
 31Bebida recomendada: Coquetel cítrico
