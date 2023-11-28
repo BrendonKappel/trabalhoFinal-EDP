@@ -1,0 +1,63 @@
+32Prefere bebida [1]Com álcool [2]Sem álcool
+16Você gosta de uma bebida [1]Fraca em álcool [2]Forte em álcool
+48Você gosta de bebidas [1]Sem leite [2]Com leite
+8Bebida [1]Doce [2]Citríca
+24Prefere bebida [1]Doce [2]Citríca
+40Gosta de bebida [1]Doce [2]Citríca
+56Qual é melhor? Bebida [1]Doce [2]Citríca
+4Você prefere bebida [1]Sem leite [2]Com leite
+12Bebida [1]Sem leite [2]Com leite
+20Você gosta de bebida [1]Sem leite [2]Com leite
+28Você gosta de bebida [1]Sem leite [2]Com leite
+36Prefere uma bebida [1]Mais simples [2]Mais incrementada
+44Uma bebida [1]Mais simples [2]Mais incrementada
+52Bebida [1]Mais simples [2]Mais incrementada
+60Gosta de uma bebida [1]Mais simples [2]Mais incrementada
+2Você prefere [1]Licor [2]Gin
+6Qual você mais gosta [1]Licor [2]Gin
+10Qual é o seu preferido [1]Vodka [2]Vinho
+14Escolha entre [1]Vodka [2]Vinho
+18Qual é melhor [1]Espumante [2]Whisky
+22Você prefere [1]Espumante [2]Whisky
+26Faça sua escolha [1]Cachaça [2]Vodka
+30Escolha sua preferida [1]Cachaça [2]Vodka
+34Você prefere bebida [1]Com gás [2]Sem gás
+38É melhor uma bebida [1]Com gás [2]Sem gás
+42Escolha entre uma bebida [1]Sem gás [2]Com gás
+46Qual é melhor bebida [1]Sem gás [2]Com gás
+50Você prefere uma bebida [1]Sem leite condensado [2]Com leite condensado
+54Você gosta de bebidas [1]Sem leite condensado [2]Com leite condensado
+58O que é melhor, uma bebida [1]Sem leite condensado [2]Com leite condensado
+62Escolha entre uma bebida [1]Sem leite condensado [2]Com leite condensado
+1Bebida recomendada: Cherry spritz
+3Bebida recomendada: Gin com cereja
+5Bebida recomendada: Grasshopper
+7Bebida recomendada: Leite de pantera
+9Bebida recomendada: Kamikaze
+11Bebida recomendada: Sangria
+13Bebida recomendada: Moscow mule
+15Bebida recomendada: Batida de vinho com abacaxi
+17Bebida recomendada: Bellini
+19Bebida recomendada: Whisky com uva e gengibre
+21Bebida recomendada: Drink de morango com espumante
+23Bebida recomendada: Batida de whisky
+25Bebida recomendada: Caipirinha de limão
+27Bebida recomendada: Margarita
+29Bebida recomendada: Leite de onça
+31Bebida recomendada: Coquetel cítrico
+33Bebida recomendada: Cocquetel aromático de cereja 
+35Bebida recomendada: Drink esfumaçante sem álcool
+37Bebida recomendada: Drink de água tônica com frutas vermelhas
+39Bebida recomendada: Quentão sem álcool de maçã
+41Bebida recomendada: Sucha de hibisco com morango
+43Bebida recomendada: Drink de carambola e framboesa sem álcool
+45Bebida recomendada: Coquetel de frutas
+47Bebida recomendada: Drink anti oxidante sem álcool
+49Bebida recomendada: Vitamina de abacate
+51Bebida recomendada: Moça rosade
+53Bebida recomendada: Milk-shake de banana
+55Bebida recomendada: Drink sem álcool de manga
+57Bebida recomendada: Blue hawaiian sem álcool
+59Bebida recomendada: Coquetel de morango sem álcool
+61Bebida recomendada: Batida de abacaxi com morango
+63Bebida recomendada: Drink de limão siciliano e hortelã
