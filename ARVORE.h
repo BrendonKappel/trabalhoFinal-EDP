@@ -5,27 +5,27 @@
 
 /************************************************* 
  * insereNodo                                    *
- * objetivo: rotina para inserir nodo na ARVORE  *
+ * objetivo: inserir nodo na ARVORE  			 *
  * entrada : ARVORE e cod                        *
  * saída   : ARVORE com mais um registro         *
  *************************************************/ 
  void insereNodo( ARVORE* *p, int codigo, const char texto[]){
  	
- 	if(!*p){                                                  // Caso a raíz esteja vazia
- 		ARVORE *no= (ARVORE *) malloc(sizeof(ARVORE));        // Aloca espaço para Registro Auxiliar
- 		strcpy(no->info.texto, texto);                        // Copia no->info.texto para colar em texto
+ 	if(!*p){                                                  // Se raíz estiver vazia
+ 		ARVORE *no= (ARVORE *) malloc(sizeof(ARVORE));        // Faz alocação de memória com o malloc
+ 		strcpy(no->info.texto, texto);                        // O strcpy copia o que tem no info.texto e coloca texto
  		no->info.codigo= codigo;                              // No recebe código
- 		no->sube= NULL;                                       // No esquerdo aponta para NULL
- 		no->subd= NULL;                                       // No direito aponta para NULL
+ 		no->sube= NULL;                                       // sube fica NULL
+ 		no->subd= NULL;                                       // subd fica NULL
  		*p= no;                                               // P recebe No
 	 }
 	 
-	 else{                                                    // Caso a raíz já tenha conteúdo
-	 	if(codigo < (*p)->info.codigo)                        // Se o Cod for menor que o Cod de p, vai para esquerda
-	 		insereNodo(&(*p)->sube, codigo, texto);
+	 else{                                                    // Raíz não está vazia
+	 	if(codigo < (*p)->info.codigo)                        // Se o Cod for MENOR que o Cod de p
+	 		insereNodo(&(*p)->sube, codigo, texto);			  // vai para esquerda
 	 		
-	 	else if(codigo > (*p)->info.codigo)                   // Se o Cod for maior que o Cod de p, vai para direita
-	 		insereNodo (&(*p)->subd, codigo, texto);
+	 	else if(codigo > (*p)->info.codigo)                   // Se o Cod for MAIOR que o Cod de p
+	 		insereNodo (&(*p)->subd, codigo, texto);		  // vai para direita
 	 		
 	 }
  }
@@ -33,23 +33,23 @@
 
 /************************************************* 
  * copiaDados                                    *
- * objetivo: copiar os dados do arquivo e botar  *
- * na árvore                                     *
+ * objetivo: copiar os dados do arquivo txt e 	 *
+ * colocar na árvore                             *
  * entrada : dados e Arvore                      *
- * saída   : Arvore com registros                *
+ * saída   : Arvore completa                     *
  *************************************************/  
 void copiaDados( FILE *dados, ARVORE* *r ){
- 	char textoaux[1000];          // auxiliar para textos
- 	int codaux, i;              // auxiliar para codigos e i
+ 	char auxTexto[1000];          										
+ 	int auxCod, i;              										
  	
- 	if(dados == NULL){            // caso o arquivo não seja encontrado
- 		printf("Arquivo vazio! \n");
- 		getche();                 // retorna ao Menu Principal
+ 	if(dados == NULL){            											// Se não existir um arquivo ou ele estiver vazio
+ 		printf("Arquivo está vazio ou não foi encontrado \n");
+ 		getche();                 											// retorna ao Menu 
  		return;
 	 } else{
-	 	for(i = 0; i < 64; i++) {                                        // repetir enquanto i for menor de 64 (pois temos 63 NODOS no total)
-	 		fscanf(dados, "%d", &codaux);                               // copia o código do arquivo
-	 		insereNodo(&(*r), codaux, fgets(textoaux, 200, dados));    // insere na árvore
+	 	for(i = 0; i < 64; i++) {                                        	// repetir enquanto i for menor de 64 (pois temos 63 NODOS no total)
+	 		fscanf(dados, "%d", &auxCod);                               	// Faz a cópia do código do arquivo
+	 		insereNodo(&(*r), auxCod, fgets(auxTexto, 200, dados));    		// chama a função de inserir na árvore para inserir o nó
 		 }
 	 }
 }

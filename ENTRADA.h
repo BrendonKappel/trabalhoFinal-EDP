@@ -34,5 +34,5 @@
 		printf("\n    ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦                                   \n");
 		printf("\n\n Escolha alguma opção: ");
 		scanf("%d", op);                   // le a opcao que o usuario escolher
-		fflush(stdin);                       // Limpa o buffer do teclado
+		fflush(stdin);                    // Limpa o buffer do teclado
  }
