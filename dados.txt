@@ -29,35 +29,35 @@
 54Você gosta de bebidas [1]Sem leite condensado [2]Com leite condensado
 58O que é melhor, uma bebida [1]Sem leite condensado [2]Com leite condensado
 62Escolha entre uma bebida [1]Sem leite condensado [2]Com leite condensado
-1Bebida: Cherry spritz
-3Bebida: Gin com cereja
-5Bebida: Grasshopper
-7Bebida: Leite de pantera
-9Bebida: Kamikaze
-11Bebida: Sangria
-13Bebida: Moscow mule
-15Bebida: Batida de vinho com abacaxi
-17Bebida: Bellini
-19Bebida: Whisky com uva e gengibre
-21Bebida: Drink de morango com espumante
-23Bebida: Batida de whisky
-25Bebida: Caipirinha de limão 
-27Bebida: Margarita
-29Bebida: Leite de onça
-31Bebida: Coquetel cítrico
-33Bebida: Cocquetel aromático de cereja 
-35Bebida: Drink esfumaçante sem álcool
-37Bebida: Drink de água tônica com frutas vermelhas
-39Bebida: Quentão sem álcool de maçã
-41Bebida: Sucha de hibisco com morango
-43Bebida: Drink de carambola e framboesa sem álcool
-45Bebida: Coquetel de frutas
-47Bebida: Drink anti oxidante sem álcool
-49Bebida: Vitamina de abacate
-51Bebida: Moça rosade
-53Bebida: Milk-shake de banana
-55Bebida: Drink sem álcool de manga
-57Bebida: Blue hawaiian sem álcool
-59Bebida: Coquetel de morango sem álcool
-61Bebida: Batida de abacaxi com morango
-63Bebida: Drink de limão siciliano e hortelã
+1Cherry spritz
+3Gin com cereja
+5Grasshopper
+7Leite de pantera
+9Kamikaze
+11Sangria
+13Moscow mule
+15Batida de vinho com abacaxi
+17Bellini
+19Whisky com uva e gengibre
+21Drink de morango com espumante
+23Batida de whisky
+25Caipirinha de limão 
+27Margarita
+29Leite de onça
+31Coquetel cítrico
+33Cocquetel aromático de cereja 
+35Drink esfumaçante sem álcool
+37Drink de água tônica com frutas vermelhas
+39Quentão sem álcool de maçã
+41Sucha de hibisco com morango
+43Drink de carambola e framboesa sem álcool
+45Coquetel de frutas
+47Drink anti oxidante sem álcool
+49Vitamina de abacate
+51Moça rosade
+53Milk-shake de banana
+55Drink sem álcool de manga
+57Blue hawaiian sem álcool
+59Coquetel de morango sem álcool
+61Batida de abacaxi com morango
+63Drink de limão siciliano e hortelã
