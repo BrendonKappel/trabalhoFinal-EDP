@@ -11,6 +11,7 @@
 #include <stdlib.h>		// encerrar o programa
 #include <conio.h>      // funções que facilitam a interação com o console
 #include <windows.h>    // funções do sistema
+#include <time.h>       // biblioteca para gerar numero aleatorio
 
 // BIBLIOTECAS DO PROJETO
 #include "MODELO.h"     // biblioteca própria da estrutura do código
@@ -37,7 +38,7 @@ int main(){
 		
 		switch(op){
 			case 1:
-				system("cls");                    // Limpa a tela do console
+				system("cls");                   // Limpa a tela do console
 				recomendacoes(&r);             // Chama a Função de perguntas ao usuário
 				break;
 				
