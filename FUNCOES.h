@@ -10,8 +10,8 @@
  * saída   : 1...6          					  *
  *************************************************/ 
  int numeroAleatorio() {
-	srand(time(NULL)); // inicializa 
-    return (rand() % 6) + 1;  // Retorna um número aleatório entre 1 e 6
+	srand(time(NULL)); 					// inicializa 
+    return (rand() % 6) + 1;  			// Retorna um número aleatório entre 1 e 6
 }
 
 
@@ -25,7 +25,7 @@
 char* fraseAleatoria(int numero) {
     static char frase[150]; 
                              
-    switch (numero) {
+    switch (numero) {			
         case 1:
             strcpy(frase, "Às vezes eu encontro a bebida, às vezes é a bebida que me encontra. A bebida ideal para você é: ");
             break;
@@ -71,13 +71,13 @@ char* fraseAleatoria(int numero) {
  	int option, numero;
  	
  	
- 	if(p == NULL){                                                        // se a raíz estiver vazia
- 		printf("\nA árvore não possui elementos");
- 		printf("\nAperte qualquer tecla para voltar ao menu principal.");
+ 	if(p == NULL){                                                        		// se a árvore estiver vazia
+ 		printf("\nNão temos bebidas cadastradas no momento.");
+ 		printf("\nAperte qualquer tecla para voltar ao menu.");
  		return;
     }
 	 
-	 else{ 														 			// se não, printar um registro 
+	 else{ 														 			// se não, mostra o registro 
 	 	if( (*p)->subd != NULL && (*p)->sube != NULL ) {         			// se não for folha, printa o texto sem complemento
 	 		printf("%s \n", (*p)->info.texto);  
 		} else { 															// se for folha printa o texto com complemento
@@ -89,29 +89,29 @@ char* fraseAleatoria(int numero) {
 	 	
 	 }
  	
- 	if((*p)->subd == NULL && (*p)->sube == NULL){                         // se for um registro folha(uma música)
+ 	if((*p)->subd == NULL && (*p)->sube == NULL){                         // acaba quando chegar na folha
  		printf("Aperte qualquer tecla para voltar ao menu principal");
- 		getche();                                                         // limpa a tela e volta ao registro inicial
+ 		getche();                                                         // limpa e volta ao menu
  		system("cls");
  		return;
  		
 	 }
 	 
 	 fflush(stdin);                                                      // limpa o buffer do teclado
-	 scanf("%d", &option);                                               // registra a opção escolhida
-	 system("cls");                                                      // limpa a tela do console
+	 scanf("%d", &option);                                               // lê a opção do usuário
+	 system("cls");                                                      // limpa a tela
 	 
 	 switch(option){
 	 	
-	 	case 1:                                                          // se a resposta for 1, descer a esquerda
+	 	case 1:                                                          // 1 (menor) vai para a esquerda
 	 		recomendacoes( &(*p)->sube );
 	 		break;
 	 	
-	 	case 2:                                                          // se a resposta for 2, descer a direita
+	 	case 2:                                                          // 2 (maior) vai para a direita
 	 		recomendacoes( &(*p)-> subd );
 	 		break;
 	 		
-	 	default:                                                         // se não for nenhuma, repetir a pergunta
+	 	default:                                                         // se não for 1 ou 2 repete a pergunta
 	 		printf("Opção inválida. Tente novamente\n\n");
 	 		recomendacoes( &(*p) );
 	 }
@@ -127,14 +127,14 @@ char* fraseAleatoria(int numero) {
  * entrada : ARVORE                               *
  * saída   : todas as folhas da arvore            *
  *************************************************/ 
- void imprime_cardapio( ARVORE* r ) { // percorre arvore e imprime suas folhas
+ void imprime_cardapio( ARVORE* r ) { 				// percorre arvore e imprime suas folhas
  	if( r != NULL ) {
- 		imprime_cardapio( r->subd );
+ 		imprime_cardapio( r->subd );			   // vai para a direita 
  		
- 		if( r->subd == NULL && r->sube == NULL) 
+ 		if( r->subd == NULL && r->sube == NULL)   // mostra se for folha
  			printf("\n%s", r->info.texto);
  			
-		imprime_cardapio( r->sube ); 	
+		imprime_cardapio( r->sube ); 	         // vai pra esquerda
 	 } 
  }
  

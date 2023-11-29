@@ -25,36 +25,37 @@
  * Programa Principal                          *
  ***********************************************/
 int main(){
-	setlocale(LC_ALL, "Portuguese");      // Altera o idioma para Português
-	int op, cod;                          // Registra a opção selecionada no Menu
-	FILE *dados= fopen("dados.txt", "r"); // Adiciona o arquivo Dados ao código para ser lido
-	ARVORE *r = NULL, *p = NULL;          // Declaração das Árvores
-	copiaDados( dados, &r );              // Copia os dados do arquivo
+	setlocale(LC_ALL, "Portuguese");       // Alfabeto em Português
+	int op, cod;                          
+	FILE *dados= fopen("dados.txt", "r");  // Adiciona o arquivo Dados ao código para ser lido
+	ARVORE *r = NULL, *p = NULL;          
+	copiaDados( dados, &r );               // Copia os dados do arquivo
 
 	
 	while( 1 ){
 	
-		menu_principal( &op ); // função para exibir o menu principal e ler a opção
+		menu_principal( &op ); 											// função para exibir o menu principal e ler a opção
 		
 		switch(op){
 			case 1:
-				system("cls");                   // Limpa a tela do console
-				recomendacoes(&r);             // Chama a Função de perguntas ao usuário
+				system("cls");                   						// Limpa a tela 
+				recomendacoes(&r);             							// Chama a Função de perguntas ao usuário
 				break;
 				
 			case 2:
 				system("cls");
-				imprime_cardapio( r ); // funçao para imprimir todas as folhas (opções de bebida)
-				getche();              // congela a tela
+				printf("\n\t\tCARDÁPIO\n");
+				imprime_cardapio( r ); 									// funçao para imprimir todas as folhas (opções de bebida)
+				getche();              									// congela a tela
 				break;
 			
 			case 0:
 				printf("\nENCERRANDO...\n");
-				exit(1);                                                        // Fecha o PED
+				exit(1);                                               // Fecha o programa
 				break;
 				
-			default:                                                            // Caso o usuário não digite 1, 2, 3 ou 0
-				system("cls");
+			default:                                                  // Caso seja digitado um número inválido
+				system("cls");										  // Limpa a tela 
 				printf("\nNúmero inválido! Tente novamente\n\n");
 		}
 	}
