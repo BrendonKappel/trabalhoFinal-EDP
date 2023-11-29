@@ -4,129 +4,26 @@
  * de bebidas com base nas respostas do usuário      *
 /*****************************************************/ 
 
+// BIBLIOTECAS DO SISTEMA
 #include <stdio.h>		// funções básicas do C
 #include <locale.h>		// Alfabeto em português (pt-BR)
 #include <string.h>		// Manipulação de strings 
 #include <stdlib.h>		// encerrar o programa
 #include <conio.h>      // funções que facilitam a interação com o console
 #include <windows.h>    // funções do sistema
+
+// BIBLIOTECAS DO PROJETO
 #include "MODELO.h"     // biblioteca própria da estrutura do código
-
+#include "ENTRADA.h"    // biblioteca própria para entrada de dados do usuário
+#include "ARVORE.h"     // biblioteca própria criação da árvore no sistema
+#include "FUNCOES.h"    // biblioteca própria para as funções principais do sistema
  
- /************************************************* 
- * insereNodo                                    *
- * objetivo: rotina para inserir nodo na ARVORE  *
- * entrada : ARVORE e cod                        *
- * saída   : ARVORE com mais um registro         *
- *************************************************/ 
- void insereNodo( ARVORE **p, int codigo, const char texto[]){
- 	
- 	if(!*p){                                                  // Caso a raíz esteja vazia
- 		ARVORE *no= (ARVORE *) malloc(sizeof(ARVORE));        // Aloca espaço para Registro Auxiliar
- 		strcpy(no->info.texto, texto);                        // Copia no->info.texto para colar em texto
- 		no->info.codigo= codigo;                              // No recebe código
- 		no->sube= NULL;                                       // No esquerdo aponta para NULL
- 		no->subd= NULL;                                       // No direito aponta para NULL
- 		*p= no;                                               // P recebe No
-	 }
-	 
-	 else{                                                    // Caso a raíz já tenha conteúdo
-	 	if(codigo < (*p)->info.codigo)                        // Se o Cod for menor que o Cod de p, vai para esquerda
-	 		insereNodo(&(*p)->sube, codigo, texto);
-	 		
-	 	else if(codigo > (*p)->info.codigo)                   // Se o Cod for maior que o Cod de p, vai para direita
-	 		insereNodo (&(*p)->subd, codigo, texto);
-	 		
-	 }
- }
- 
-
-/************************************************* 
- * copiaDados                                    *
- * objetivo: copiar os dados do arquivo e botar  *
- * na árvore                                     *
- * entrada : dados e Arvore                      *
- * saída   : Arvore com registros                *
- *************************************************/  
-void copiaDados( FILE *dados, ARVORE **r ){
- 	char textoaux[1000];          // auxiliar para textos
- 	int codaux, i;              // auxiliar para codigos e i
- 	
- 	if(dados == NULL){            // caso o arquivo não seja encontrado
- 		printf("Arquivo vazio! \n");
- 		getche();                 // retorna ao Menu Principal
- 		return;
-	 } else{
-	 	for(i = 0; i < 64; i++) {                                        // repetir enquanto i for menor de 64 (pois temos 63 NODOS no total)
-	 		fscanf(dados, "%d", &codaux);                               // copia o código do arquivo
-	 		insereNodo(&(*r), codaux, fgets(textoaux, 200, dados));    // insere na árvore
-		 }
-	 }
-}
- 
- 
-/************************************************* 
- * recomendacoes                                 *
- * objetivo: Percorrer a base de dados (txt) por 
- * meio das respostas do usuário, a fim de indicar 
- * uma bebida para o mesmo
- * entrada : ARVORE                              *
- * saída   : bebida indicada ao usuário          *
- *************************************************/ 
- void recomendacoes( ARVORE **p ){
- 	int option;
- 	
- 	if(p == NULL){                                                        // se a raíz estiver vazia
- 		printf("\nA árvore não possui elementos");
- 		printf("\nAperte qualquer tecla para voltar ao menu principal.");
- 		return;
-    }
-	 
-	 else{
-	 	printf("%s \n", (*p)->info.texto);                                // se não, printar um registro
-	 	
-	 }
- 	
- 	if((*p)->subd == NULL && (*p)->sube == NULL){                         // se for um registro folha(uma música)
- 		printf("Aperte qualquer tecla para voltar ao menu principal");
- 		getche();                                                         // limpa a tela e volta ao registro inicial
- 		system("cls");
- 		return;
- 		
-	 }
-	 
-	 fflush(stdin);                                                      // limpa o buffer do teclado
-	 scanf("%d", &option);                                               // registra a opção escolhida
-	 system("cls");                                                      // limpa a tela do console
-	 
-	 switch(option){
-	 	
-	 	case 1:                                                          // se a resposta for 1, descer a esquerda
-	 		recomendacoes( &(*p)->sube );
-	 		break;
-	 	
-	 	case 2:                                                          // se a resposta for 2, descer a direita
-	 		recomendacoes( &(*p)-> subd );
-	 		break;
-	 		
-	 	default:                                                         // se não for nenhuma, repetir a pergunta
-	 		printf("Opção inválida. Tente novamente\n\n");
-	 		recomendacoes( &(*p) );
-	 }
-	 
- 	
- }
- 
- void imprime_cardapio( ARVORE *r) { // percorre arvore e imprime suas folhas
- 	
- }
  
  
 /***********************************************
  * Programa Principal                          *
  ***********************************************/
-
-int main(void){
+int main(){
 	setlocale(LC_ALL, "Portuguese");      // Altera o idioma para Português
 	int op, cod;                          // Registra a opção selecionada no Menu
 	FILE *dados= fopen("dados.txt", "r"); // Adiciona o arquivo Dados ao código para ser lido
@@ -135,31 +32,8 @@ int main(void){
 
 	
 	while( 1 ){
-		printf("\n        Kit Maker, Redefinindo a Arte de Brindar.        \n");
-		printf("\n       ¦¦¦¦¦¦¦¦¦                							 "); 
-		printf("\n        ¦¦¦¦¦¦¦                 							 "); 
-		printf("\n        ¦¦¦¦¦¦¦               [1] Recomendações de bebida  "); 
-		printf("\n        ¦¦¦¦¦¦¦                                            "); 
-		printf("\n       ¦¦¦¦¦¦¦¦¦                                           "); 
-		printf("\n      ¦¦¦¦¦¦¦¦¦¦¦                                          "); 
-		printf("\n     ¦¦¦¦¦¦¦¦¦¦¦¦¦             							 "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦           [2] Exibir cardápio completo "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦                                        "); 
-		printf("\n    ¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦¦¦                                   "); 
-		printf("\n    ¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦¦¦                                   "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦                                    "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦        [3] FUNCAO                   "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦                  				     "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                                       "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦          [0] Sair do programa         "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦                   					 "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦                                      "); 
-		printf("\n    ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦                                   \n");
-		printf("\n\n Escolha alguma opção: ");
-		scanf("%d", &op);                    // Tecla de opção do menu
-		fflush(stdin);                       // Limpa o buffer do teclado
+	
+		menu_principal( &op ); // função para exibir o menu principal e ler a opção
 		
 		switch(op){
 			case 1:
@@ -169,7 +43,8 @@ int main(void){
 				
 			case 2:
 				system("cls");
-				//imprime_cardapio(&r); // funçao para imprimir todas as folhas (opções de bebida)
+				imprime_cardapio( r ); // funçao para imprimir todas as folhas (opções de bebida)
+				getche();              // congela a tela
 				break;
 			
 			case 0:
