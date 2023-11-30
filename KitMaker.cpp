@@ -33,20 +33,21 @@ int main(){
 
 	
 	while( 1 ){
-	
+		
 		menu_principal( &op ); 											// função para exibir o menu principal e ler a opção
 		
 		switch(op){
 			case 1:
-				system("cls");                   						// Limpa a tela 
 				recomendacoes(&r);             							// Chama a Função de perguntas ao usuário
 				break;
 				
 			case 2:
-				system("cls");
 				printf("\n\t\tCARDÁPIO\n");
 				imprime_cardapio( r ); 									// funçao para imprimir todas as folhas (opções de bebida)
 				getche();              									// congela a tela
+				break;
+				
+			case 3:
 				break;
 			
 			case 0:
@@ -55,9 +56,10 @@ int main(){
 				break;
 				
 			default:                                                  // Caso seja digitado um número inválido
-				system("cls");										  // Limpa a tela 
-				printf("\nNúmero inválido! Tente novamente\n\n");
-		}
+				printf("\nNúmero inválido! Tente novamente\n");
+				printf("\nAperte qualquer tecla para voltar ao menu.\n");
+				getche();  
+		} 
 	}
 	
 }

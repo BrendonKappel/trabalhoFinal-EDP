@@ -9,9 +9,12 @@
  * entrada : nada                                 *
  * saída   : 1...6          					  *
  *************************************************/ 
- int numeroAleatorio() {
+ void numeroAleatorio( ARVORE* p, int *numero ) {
 	srand(time(NULL)); 					// inicializa 
-    return (rand() % 6) + 1;  			// Retorna um número aleatório entre 1 e 6
+	if(p->info.codigo < 32)				// frases para bebida com álcool (menor que 32 é  com)   
+    	*numero = (rand() % 6) + 1;  	// Retorna um número aleatório entre 1 e 6
+    if(p->info.codigo > 32)				// frases para bebidas sem álcool (maior que 32 é  sem)
+    	*numero = (rand() % 6) + 7;		// Retorna um número aleatório entre 7 e 12
 }
 
 
@@ -24,11 +27,12 @@
  *************************************************/ 
 char* fraseAleatoria(int numero) {
     static char frase[150]; 
-                             
-    switch (numero) {			
-        case 1:
-            strcpy(frase, "Às vezes eu encontro a bebida, às vezes é a bebida que me encontra. A bebida ideal para você é: ");
-            break;
+                            
+    switch (numero) {
+    	// Com álcool
+		case 1:
+        strcpy(frase, "Às vezes eu encontro a bebida, às vezes é a bebida que me encontra. A bebida ideal para você é: ");
+        break;
 
         case 2:
             strcpy(frase, "Beba, dance, curta e viva! No outro dia, é só colocar a culpa na bebida. A bebida que mais combina com você é: ");
@@ -46,15 +50,41 @@ char* fraseAleatoria(int numero) {
             strcpy(frase, "Nunca vi boa amizade nascer em leiteria. A bebida que faz par perfeito com você é: ");
             break;
 
-        case 6:
+       	case 6:
             strcpy(frase, "Momentos especiais pedem brindes com as pessoas queridas. A bebida que dança em sintonia com sua essência é: ");
+            break;
+        
+		// Sem álcool    
+		case 7:
+        	strcpy(frase, "Aproveite sua escolha sem álcool, o sabor está sempre na diversão! Sua alma gêmea no universo das bebidas é: ");
+        	break;
+
+        case 8:
+            strcpy(frase, "Seja a estrela da festa, mesmo sem álcool. Brindemos à sua decisão consciente! A bebida que mais combina com sua personalidade é: ");
+            break;
+
+        case 9:
+            strcpy(frase, "Escolha com sabedoria, beba com alegria. Sua opção sem álcool é sempre bem-vinda! A bebida que melhor se adequa ao seu perfil é: ");
+            break;
+
+        case 10:
+            strcpy(frase, "Sabor sem álcool, diversão em dobro. À sua escolha refrescante! A bebida que mais se encaixa com seu estilo é: ");
+            break;
+
+        case 11:
+            strcpy(frase, "Nada como um drink sem álcool para celebrar a vida com clareza e leveza. A bebida que faz par perfeito com você é: ");
+            break;
+
+       	case 12:
+            strcpy(frase, "Quem disse que diversão precisa de álcool? Seja leve, beba com sabedoria! A bebida que melhor se encaixa na sua vibe é: ");
             break;
             
         default:
         	strcpy(frase, "Bebida: ");
         	break;
+				 
     }
-
+    
     return frase;
 }
  
@@ -82,7 +112,7 @@ char* fraseAleatoria(int numero) {
 	 		printf("%s \n", (*p)->info.texto);  
 		} else { 															// se for folha printa o texto com complemento
 						
-			numero = numeroAleatorio();										// gera numero aleatorio entre 1 e 5
+			numeroAleatorio( *p, &numero );										// gera numero aleatorio entre 1 e 5
 	 		printf(" %s %s\n", fraseAleatoria(numero), (*p)->info.texto);  // frase aleatoria + nome da bebida
 		}	 									 
 	 		

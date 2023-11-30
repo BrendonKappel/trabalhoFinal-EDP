@@ -10,6 +10,9 @@
  * saída   : op                                   *
  *************************************************/ 
  void menu_principal( int *op ) {
+ 	
+ 		system("cls");					// Limpa tela
+ 		
  		printf("\n        Kit Maker, Redefinindo a Arte de Brindar.        \n");
 		printf("\n       ¦¦¦¦¦¦¦¦¦                							 "); 
 		printf("\n        ¦¦¦¦¦¦¦                 							 "); 
@@ -34,5 +37,7 @@
 		printf("\n    ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦                                   \n");
 		printf("\n\n Escolha alguma opção: ");
 		scanf("%d", op);                   // le a opcao que o usuario escolher
-		fflush(stdin);                    // Limpa o buffer do teclado
+		fflush(stdin);                     // Limpa o buffer do teclado
+		
+		system("cls");					   // Limpa tela
  }
