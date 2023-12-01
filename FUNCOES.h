@@ -99,6 +99,7 @@ char* fraseAleatoria(int numero) {
  *************************************************/ 
  void recomendacoes( ARVORE* *p ){
  	int option, numero;
+	
  	
  	
  	if(p == NULL){                                                        		// se a árvore estiver vazia
@@ -113,11 +114,23 @@ char* fraseAleatoria(int numero) {
 		} else { 															// se for folha printa o texto com complemento
 						
 			numeroAleatorio( *p, &numero );										// gera numero aleatorio entre 1 e 5
-	 		printf(" %s %s\n", fraseAleatoria(numero), (*p)->info.texto);  // frase aleatoria + nome da bebida
-		}	 									 
-	 		
-	 	
-	 }
+	 		//printf(" %s %s\n", fraseAleatoria(numero), (*p)->info.texto);  // frase aleatoria + nome da bebida
+	 		char *token = strtok((*p)->info.texto, "-");
+			if (token != NULL) {
+				printf("%s\n", token);
+			}
+
+			// Extract and print the steps
+			while ((token = strtok(NULL, "-")) != NULL) {
+			// Trim leading and trailing whitespaces
+				while (*token == ' ') {
+					token++;
+				}
+			printf("\t%s\n", token);
+			}
+	}
+
+}
  	
  	if((*p)->subd == NULL && (*p)->sube == NULL){                         // acaba quando chegar na folha
  		printf("Aperte qualquer tecla para voltar ao menu principal");
