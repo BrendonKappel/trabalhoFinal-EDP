@@ -114,6 +114,23 @@ void imprime_complementos(ARVORE* p) {
     }
     printf("\nAperte qualquer tecla para voltar ao menu.");
 }
+
+ /***************************************************
+ * imprime_nome_bebida                              *
+ * objetivo: imprimir somente o nome da bebida      *
+ * entrada : ARVORE                                 *
+ * saída   : só o nome da bebida                    *
+ ***************************************************/ 
+void imprime_nome_bebida(ARVORE* p) {
+    if (p != NULL) {
+        int i = 0;
+        while (p->info.texto[i] != '-' && p->info.texto[i] != '\0') {
+            printf("%c", p->info.texto[i]);
+            i++;
+        }
+        printf("\n");
+    }
+}
  
  
   /***************************************************
@@ -133,7 +150,7 @@ void busca_recursivo( ARVORE* p, int cod ){
 			if( p->info.codigo < cod )
 				busca_recursivo( p->subd, cod );
 			else
-				if( p->info.codigo == cod )
+				if( p->info.codigo == cod )		// encontrou o nodo (no caso do txt a linha a ser printada na tela)
 					imprime_complementos( p ); // para imprimir receita e modo separadamente
 } 
 
@@ -218,7 +235,8 @@ void busca_recursivo( ARVORE* p, int cod ){
  		
  		if( r->subd == NULL && r->sube == NULL) {    
 		    (*cont)++;
- 			printf("\n[%i]%s", *cont, r->info.texto); 			// mostra se for folha								
+ 			printf("\n[%i]", *cont); 			// mostra se for folha	
+			imprime_nome_bebida( r );							
  			
  		}
 		imprime_cardapio( r->subd, aux, cont ); 	         // vai pra esquerda
