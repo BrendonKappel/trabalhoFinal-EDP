@@ -49,8 +49,8 @@ void copiaDados( FILE *dados, ARVORE* *r ){
 	 } else{
 	 	for(i = 0; i < 64; i++) {                                        	// repetir enquanto i for menor de 64 (pois temos 63 NODOS no total)
 	 		fscanf(dados, "%d", &auxCod);                               	// Faz a cópia do código do arquivo
-	 		insereNodo(&(*r), auxCod, fgets(auxTexto, 200, dados));    		// chama a função de inserir na árvore para inserir o nó
-		 }
+	 		insereNodo(&(*r), auxCod, fgets(auxTexto, 1000, dados));       // chama a função de inserir na árvore para inserir o nó
+		 }																	// 1000 é a quantidade maxima de caracteres que podem ser lidos
 	 }
 }
  

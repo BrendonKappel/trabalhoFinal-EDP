@@ -87,7 +87,74 @@ char* fraseAleatoria(int numero) {
     
     return frase;
 }
+
+
+ /***************************************************
+ * imprime_complementos                             *
+ * objetivo: printa dados identado                  *
+ * entrada : ARVORE                                 *
+ * saída   : 1 linha inteira identada               *
+ ***************************************************/ 
+void imprime_complementos(ARVORE* p) {
+    if (p != NULL) {
+        if (p->info.texto[0] != '\0') {
+            for (int i = 0; i < strlen(p->info.texto); i++) { 					 // letra por letra
+                if (p->info.texto[i] == '-' && p->info.texto[i + 1] == '-') {    // com 2 "-"
+                    printf("\n\n   ");    										 // para titulo 
+                    i++; 
+                } else if (p->info.texto[i] == '-') {      						 // com 1 "-"
+                    printf("\n      ");  				   						 //para texto (ingredientes/passos)
+                } else {
+                	printf("%c", p->info.texto[i]);
+				}
+            }
+        }
+
+        printf("\n");
+    }
+    printf("\nAperte qualquer tecla para voltar ao menu.");
+}
+
+ /***************************************************
+ * imprime_nome_bebida                              *
+ * objetivo: imprimir somente o nome da bebida      *
+ * entrada : ARVORE                                 *
+ * saída   : só o nome da bebida                    *
+ ***************************************************/ 
+void imprime_nome_bebida(ARVORE* p) {
+    if (p != NULL) {
+        int i = 0;
+        while (p->info.texto[i] != '-' && p->info.texto[i] != '\0') {
+            printf("%c", p->info.texto[i]);
+            i++;
+        }
+        printf("\n");
+    }
+}
  
+ 
+  /***************************************************
+ * busca_recursivo                                 *
+ * objetivo: rotina para buscar registro por código*
+ * entrada : ARVORE e cod                          *
+ * saída   : ponteiro para o registro              *
+ ***************************************************/ 
+void busca_recursivo( ARVORE* p, int cod ){
+	
+	if( p == NULL )
+		printf( "\n Registro não encontrado!" );
+	else
+		if( p->info.codigo > cod )
+			busca_recursivo( p->sube, cod );
+		else
+			if( p->info.codigo < cod )
+				busca_recursivo( p->subd, cod );
+			else
+				if( p->info.codigo == cod )		// encontrou o nodo (no caso do txt a linha a ser printada na tela)
+					imprime_complementos( p ); // para imprimir receita e modo separadamente
+} 
+
+
  
 /************************************************* 
  * recomendacoes                                 *
@@ -113,27 +180,15 @@ char* fraseAleatoria(int numero) {
 	 		printf("%s \n", (*p)->info.texto);  
 		} else { 															// se for folha printa o texto com complemento
 						
-			numeroAleatorio( *p, &numero );										// gera numero aleatorio entre 1 e 5
-	 		//printf(" %s %s\n", fraseAleatoria(numero), (*p)->info.texto);  // frase aleatoria + nome da bebida
-	 		char *token = strtok((*p)->info.texto, "-");
-			if (token != NULL) {
-				printf("%s\n", token);
-			}
-
-			// Extract and print the steps
-			while ((token = strtok(NULL, "-")) != NULL) {
-			// Trim leading and trailing whitespaces
-				while (*token == ' ') {
-					token++;
-				}
-			printf("\t%s\n", token);
-			}
+			numeroAleatorio( *p, &numero );									// gera numero aleatorio entre 1 e 5
+			printf("\n %s ", fraseAleatoria(numero) );						// mostra frase aleatória
+			
+	 		imprime_complementos( *p );
 	}
 
 }
  	
  	if((*p)->subd == NULL && (*p)->sube == NULL){                         // acaba quando chegar na folha
- 		printf("Aperte qualquer tecla para voltar ao menu principal");
  		getche();                                                         // limpa e volta ao menu
  		system("cls");
  		return;
@@ -163,24 +218,54 @@ char* fraseAleatoria(int numero) {
  }
  
  
- /************************************************* 
+ 
+  /************************************************* 
  * recomendacoes                                  *
  * objetivo: Mostrar todas as bebidas disponíveis *
  * no cardápio  								  *
  * entrada : ARVORE                               *
  * saída   : todas as folhas da arvore            *
  *************************************************/ 
- void imprime_cardapio( ARVORE* r ) { 				// percorre arvore e imprime suas folhas
- 	if( r != NULL ) {
- 		imprime_cardapio( r->subd );			   // vai para a direita 
+ void imprime_cardapio( ARVORE* r, ARVORE* aux, int *cont ) { 		// percorre arvore e imprime suas folhas                           				
+ 	int numBebida, cod;
+ 	
+ 	if( *cont < 32 ) {
+ 		if( r != NULL ) {
+ 		imprime_cardapio( r->sube, aux, cont );			    // vai para a direita 
  		
- 		if( r->subd == NULL && r->sube == NULL)   // mostra se for folha
- 			printf("\n%s", r->info.texto);
+ 		if( r->subd == NULL && r->sube == NULL) {    
+		    (*cont)++;
+ 			printf("\n[%i]", *cont); 			// mostra se for folha	
+			imprime_nome_bebida( r );							
  			
-		imprime_cardapio( r->sube ); 	         // vai pra esquerda
-	 } 
+ 		}
+		imprime_cardapio( r->subd, aux, cont ); 	         // vai pra esquerda
+	}
+	} else {
+		while( 1 ) {
+			printf("\n\n Qual bebida chamou sua atenção? [1 - 32] "); 
+			scanf("%i", &numBebida);
+			printf("\n");
+			
+			if(numBebida > 0 && numBebida < 33) {
+				r = aux;								// ponteiro auxiliar p/ arvore nao cair na condição de nula
+				cod = numBebida + (numBebida - 1);     // n + (n - 1) --> formula que criei p/ achar o nodo
+				busca_recursivo( r, cod );			  // Função p/ procurar nodo pelo codigo
+				
+				break;
+			} else {
+				printf("\nNúmero não está na lista! Tente novamente."); 
+			}
+		}
+		
+	}
+	
  }
  
+ 
+ 
+ 
+
  
 
 
