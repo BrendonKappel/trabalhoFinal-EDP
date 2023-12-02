@@ -87,6 +87,8 @@ char* fraseAleatoria(int numero) {
     
     return frase;
 }
+
+
  
  
 /************************************************* 
@@ -113,20 +115,21 @@ char* fraseAleatoria(int numero) {
 	 		printf("%s \n", (*p)->info.texto);  
 		} else { 															// se for folha printa o texto com complemento
 						
-			numeroAleatorio( *p, &numero );										// gera numero aleatorio entre 1 e 5
-	 		//printf(" %s %s\n", fraseAleatoria(numero), (*p)->info.texto);  // frase aleatoria + nome da bebida
+			numeroAleatorio( *p, &numero );									// gera numero aleatorio entre 1 e 5
+			printf("\n %s", fraseAleatoria(numero) );						// mostra frase aleatória
+			
 	 		char *token = strtok((*p)->info.texto, "-");
-			if (token != NULL) {
+			if (token != NULL) {											// mostra nome da bebida
 				printf("%s\n", token);
 			}
 
 			// Extract and print the steps
 			while ((token = strtok(NULL, "-")) != NULL) {
 			// Trim leading and trailing whitespaces
-				while (*token == ' ') {
+				while (*token == ' ') {									  // 
 					token++;
 				}
-			printf("\t%s\n", token);
+			printf("\t%s\n", token);									  // Mostra ingredientes e modo de preparo
 			}
 	}
 

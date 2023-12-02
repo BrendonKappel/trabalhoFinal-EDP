@@ -29,7 +29,7 @@
 54Você gosta de bebidas [1]Sem leite condensado [2]Com leite condensado
 58O que é melhor, uma bebida [1]Sem leite condensado [2]Com leite condensado
 62Escolha entre uma bebida [1]Sem leite condensado [2]Com leite condensado
-1Cherry spritz - DESCRIÇÃO: - O Cherry Spritz é um coquetel refrescante, seu sabor suave que o torna sutil para qualquer ocasião. Uma ótima experiência e degustação! - INGREDIENTES: - 25 ml de Licor de Cereja - 25 ml de Licor Triple Sec - Espumante Prosecco - Água com gás - MODO DE PREPARO: - 1. Coloque bastante gelo em uma taça e mexa para gelar - 2. Retire o degelo - 3. Adicione os licores e mexa para gelar. - 4. Sirva o espumante lentamente. - 5. Complete com água com gás. - 6. Mexa levemente e complete com mais gelo. 7 - Finalize com duas cerejas em calda.  
+1Cherry spritz - - INGREDIENTES: - 25 ml de Licor de Cereja - 25 ml de Licor Triple Sec - Espumante Prosecco - Água com gás - - MODO DE PREPARO: - 1. Coloque bastante gelo em uma taça e mexa para gelar - 2. Retire o degelo - 3. Adicione os licores e mexa para gelar. - 4. Sirva o espumante lentamente. - 5. Complete com água com gás. - 6. Mexa levemente e complete com mais gelo. - 7. Finalize com duas cerejas em calda.  
 3Gin com cereja
 5Grasshopper
 7Leite de pantera
