@@ -28,7 +28,7 @@ int main(){
 	setlocale(LC_ALL, "Portuguese");       // Alfabeto em Português
 	int op, cod, cont;                          
 	FILE *dados= fopen("dados.txt", "r");  // Adiciona o arquivo Dados ao código para ser lido
-	ARVORE *r = NULL, *p = NULL;          
+	ARVORE *r = NULL, *aux = NULL;          
 	copiaDados( dados, &r );               // Copia os dados do arquivo
 
 	
@@ -42,9 +42,10 @@ int main(){
 				break;
 				
 			case 2:
-				cont = 0;											// precisa zerar o contador na main pois é funcao recursiva
+				cont = 0;	// precisa zerar o contador na main pois é funcao recursiva
+				aux = r;	// precisa de um ponteiro auxliar p/ a arvore									
 				printf("\n\t\tCARDÁPIO\n");
-				imprime_cardapio( r, &cont ); 						// funçao para imprimir todas as folhas (opções de bebida)
+				imprime_cardapio( r, aux, &cont ); 						// funçao para imprimir todas as folhas (opções de bebida)
 				getche();              								// congela a tela
 				break;
 				
