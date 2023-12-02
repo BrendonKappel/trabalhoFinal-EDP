@@ -166,24 +166,10 @@ char* fraseAleatoria(int numero) {
  }
  
  
- /************************************************* 
- * recomendacoes                                  *
- * objetivo: Mostrar todas as bebidas disponíveis *
- * no cardápio  								  *
- * entrada : ARVORE                               *
- * saída   : todas as folhas da arvore            *
- *************************************************/ 
- void imprime_cardapio( ARVORE* r ) { 				// percorre arvore e imprime suas folhas
- 	if( r != NULL ) {
- 		imprime_cardapio( r->subd );			   // vai para a direita 
- 		
- 		if( r->subd == NULL && r->sube == NULL)   // mostra se for folha
- 			printf("\n%s", r->info.texto);
- 			
-		imprime_cardapio( r->sube ); 	         // vai pra esquerda
-	 } 
- }
  
+ 
+ 
+
  
 
 
