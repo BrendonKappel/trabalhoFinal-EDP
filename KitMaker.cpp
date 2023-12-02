@@ -42,11 +42,11 @@ int main(){
 				break;
 				
 			case 2:
-				cont = 0;	// precisa zerar o contador na main pois é funcao recursiva
-				aux = r;	// precisa de um ponteiro auxliar p/ a arvore									
+				cont = 0;												// precisa zerar o contador na main pois é funcao recursiva
+				aux = r;												// precisa de um ponteiro auxliar p/ a arvore									
 				printf("\n\t\tCARDÁPIO\n");
 				imprime_cardapio( r, aux, &cont ); 						// funçao para imprimir todas as folhas (opções de bebida)
-				getche();              								// congela a tela
+				getche();              									// congela a tela
 				break;
 				
 			case 3:
