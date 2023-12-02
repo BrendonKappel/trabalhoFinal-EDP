@@ -42,6 +42,30 @@
 		system("cls");					   // Limpa tela
  }
  
+void imprime_complementos(ARVORE* p) {
+    if (p != NULL) {
+        if (p->info.texto[0] != '\0') {
+            // Replace "--" with "\t\n" and "-" with "\n"
+            for (int i = 0; i < strlen(p->info.texto); i++) {
+                if (p->info.texto[i] == '-' && p->info.texto[i + 1] == '-' && p->info.texto[i + 2] == '-') {
+                    printf("\n      "); // Tab character
+                    i += 2; // Continue from the next position after three consecutive hyphens
+                } else if (p->info.texto[i] == '-' && p->info.texto[i + 1] == '-') {
+                    printf("\n\n   ");
+                    i++; // Continue from the next position after two consecutive hyphens
+                } else if (p->info.texto[i] == '-') {
+                    printf("\n");
+                } else {
+                	printf("%c", p->info.texto[i]);
+				}
+            }
+        }
+
+        printf("\n");
+    }
+    printf("\nAperte qualquer tecla para voltar ao menu.");
+}
+ 
  
   /***************************************************
  * busca_recursivo                                 *
@@ -62,8 +86,8 @@ void busca_recursivo( ARVORE* p, int cod ){
 				busca_recursivo( p->subd, cod );
 			else
 				if( p->info.codigo == cod )
-					printf( "\n Bebida: %s", p->info.texto );
-					// imprime_partes( p->info.texto ); // para imprimir receita e modo separadamente
+					//printf( "\n Bebida: %s", p->info.texto );
+					imprime_complementos( p ); // para imprimir receita e modo separadamente
 } 
 
  
@@ -92,6 +116,7 @@ void busca_recursivo( ARVORE* p, int cod ){
 		while( 1 ) {
 			printf("\n\n Qual bebida chamou sua atenção? [1 - 32] "); 
 			scanf("%i", &numBebida);
+			printf("\n");
 			
 			if(numBebida > 0 && numBebida < 33) {
 				r = aux;								// ponteiro auxiliar p/ arvore nao cair na condição de nula
