@@ -18,9 +18,8 @@
 #include "ENTRADA.h"    // biblioteca própria para entrada de dados do usuário
 #include "ARVORE.h"     // biblioteca própria criação da árvore no sistema
 #include "FUNCOES.h"    // biblioteca própria para as funções principais do sistema
- 
- 
- 
+
+
 /***********************************************
  * Programa Principal                          *
  ***********************************************/
@@ -49,9 +48,6 @@ int main(){
 				getche();              									// congela a tela
 				break;
 				
-			case 3:
-				break;
-			
 			case 0:
 				printf("\nENCERRANDO...\n");
 				exit(1);                                               // Fecha o programa

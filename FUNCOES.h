@@ -122,13 +122,13 @@ void imprime_complementos(ARVORE* p) {
  * saída   : só o nome da bebida                    *
  ***************************************************/ 
 void imprime_nome_bebida(ARVORE* p) {
-    if (p != NULL) {
+    if (p != NULL) {													// se ponteiro não for nulo
         int i = 0;
-        while (p->info.texto[i] != '-' && p->info.texto[i] != '\0') {
-            printf("%c", p->info.texto[i]);
+        while (p->info.texto[i] != '-' && p->info.texto[i] != '\0') {	// vai percorrendo letra por letra até achar "-" ou "NULL"
+            printf("%c", p->info.texto[i]);								// printa o caractere
             i++;
         }
-        printf("\n");
+        printf("\n"); 													// quebra de linha
     }
 }
  
@@ -141,17 +141,17 @@ void imprime_nome_bebida(ARVORE* p) {
  ***************************************************/ 
 void busca_recursivo( ARVORE* p, int cod ){
 	
-	if( p == NULL )
+	if( p == NULL )									// verifica se ponteiro não aponta p/ NULL
 		printf( "\n Registro não encontrado!" );
-	else
-		if( p->info.codigo > cod )
-			busca_recursivo( p->sube, cod );
+	else											// se não
+		if( p->info.codigo > cod )	
+			busca_recursivo( p->sube, cod );		// vai p/ esquerda primeiro
 		else
 			if( p->info.codigo < cod )
-				busca_recursivo( p->subd, cod );
+				busca_recursivo( p->subd, cod );	// vai p/ direita
 			else
-				if( p->info.codigo == cod )		// encontrou o nodo (no caso do txt a linha a ser printada na tela)
-					imprime_complementos( p ); // para imprimir receita e modo separadamente
+				if( p->info.codigo == cod )			// encontrou o nodo (no caso do txt a linha a ser printada na tela)
+					imprime_complementos( p ); 		// para imprimir receita e modo separadamente
 } 
 
 
@@ -167,41 +167,39 @@ void busca_recursivo( ARVORE* p, int cod ){
  void recomendacoes( ARVORE* *p ){
  	int option, numero;
 	
- 	
- 	
- 	if(p == NULL){                                                        		// se a árvore estiver vazia
+ 	if(p == NULL){                                                        	 // se a árvore estiver vazia
  		printf("\nNão temos bebidas cadastradas no momento.");
  		printf("\nAperte qualquer tecla para voltar ao menu.");
  		return;
     }
 	 
-	 else{ 														 			// se não, mostra o registro 
-	 	if( (*p)->subd != NULL && (*p)->sube != NULL ) {         			// se não for folha, printa o texto sem complemento
+	 else{ 														 			// se não
+	 	if( (*p)->subd != NULL && (*p)->sube != NULL ) {         			// se não for folha, printa a PERGUNTA
 	 		printf("%s \n", (*p)->info.texto);  
-		} else { 															// se for folha printa o texto com complemento
+		} else { 															// se for folha, printa a BEBIDA (frase + nome_bebida + ingredientes + modo de preparo)
 						
 			numeroAleatorio( *p, &numero );									// gera numero aleatorio entre 1 e 5
 			printf("\n %s ", fraseAleatoria(numero) );						// mostra frase aleatória
 			
-	 		imprime_complementos( *p );
+	 		imprime_complementos( *p );										// mostra nome da bebida com receita e ingredientes
 	}
 
 }
  	
- 	if((*p)->subd == NULL && (*p)->sube == NULL){                         // acaba quando chegar na folha
- 		getche();                                                         // limpa e volta ao menu
- 		system("cls");
- 		return;
+ 	if((*p)->subd == NULL && (*p)->sube == NULL){                          // acaba quando chegar na folha
+ 		getche();                                                          // congela a tela
+ 		system("cls");													   // limpa
+ 		return;															   // volta ao menu
  		
 	 }
 	 
-	 fflush(stdin);                                                      // limpa o buffer do teclado
-	 scanf("%d", &option);                                               // lê a opção do usuário
-	 system("cls");                                                      // limpa a tela
+	 fflush(stdin);                                                       // limpa o buffer do teclado
+	 scanf("%d", &option);                                                // lê a opção do usuário
+	 system("cls");                                                       // limpa a tela
 	 
 	 switch(option){
 	 	
-	 	case 1:                                                          // 1 (menor) vai para a esquerda
+	 	case 1:                                                           // 1 (menor) vai para a esquerda
 	 		recomendacoes( &(*p)->sube );
 	 		break;
 	 	
@@ -226,33 +224,33 @@ void busca_recursivo( ARVORE* p, int cod ){
  * entrada : ARVORE                               *
  * saída   : todas as folhas da arvore            *
  *************************************************/ 
- void imprime_cardapio( ARVORE* r, ARVORE* aux, int *cont ) { 		// percorre arvore e imprime suas folhas                           				
+ void imprime_cardapio( ARVORE* r, ARVORE* aux, int *cont ) {  // percorre arvore e imprime suas folhas                           				
  	int numBebida, cod;
  	
- 	if( *cont < 32 ) {
+ 	if( *cont < 32 ) {										  // imprime todas as folhas (32 é o numero de folhas)
  		if( r != NULL ) {
- 		imprime_cardapio( r->sube, aux, cont );			    // vai para a direita 
+ 		imprime_cardapio( r->sube, aux, cont );			      // vai para a esquerda 
  		
- 		if( r->subd == NULL && r->sube == NULL) {    
-		    (*cont)++;
- 			printf("\n[%i]", *cont); 			// mostra se for folha	
-			imprime_nome_bebida( r );							
+ 		if( r->subd == NULL && r->sube == NULL) {    		  // verifica se é folha
+		    (*cont)++;										  
+ 			printf("\n[%i]", *cont); 						  // mostra se for folha	
+			imprime_nome_bebida( r );						  // mostra somente o nome da bebida	
  			
  		}
-		imprime_cardapio( r->subd, aux, cont ); 	         // vai pra esquerda
+		imprime_cardapio( r->subd, aux, cont ); 	          // vai pra direita
 	}
-	} else {
-		while( 1 ) {
+	} else {												  // se já imprimiu todas as folhas
+		while( 1 ) {										  // while true
 			printf("\n\n Qual bebida chamou sua atenção? [1 - 32] "); 
 			scanf("%i", &numBebida);
 			printf("\n");
 			
 			if(numBebida > 0 && numBebida < 33) {
-				r = aux;								// ponteiro auxiliar p/ arvore nao cair na condição de nula
-				cod = numBebida + (numBebida - 1);     // n + (n - 1) --> formula que criei p/ achar o nodo
-				busca_recursivo( r, cod );			  // Função p/ procurar nodo pelo codigo
+				r = aux;								     // ponteiro auxiliar p/ arvore nao cair na condição de nula
+				cod = numBebida + (numBebida - 1);           // n + (n - 1) --> formula que criei p/ achar o nodo
+				busca_recursivo( r, cod );			         // Função p/ procurar nodo pelo codigo
 				
-				break;
+				break;									     // quebra e retorna para o menu
 			} else {
 				printf("\nNúmero não está na lista! Tente novamente."); 
 			}
